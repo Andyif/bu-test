@@ -1,5 +1,6 @@
 package org.bu.test.butest;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -52,4 +53,16 @@ class BuTestApplicationTests {
                 .andExpect(jsonPath("$.premium.revenue", is(premiumRevenue)));
     }
 
+    @Test
+    void dayCapacityParamValidationTest() throws Exception {
+
+        final MockHttpServletRequestBuilder requestBuilder = get("/day-capacity")
+                .queryParam("economy", "0")
+                .queryParam("premium", "-1")
+                .contentType(MediaType.APPLICATION_JSON);
+
+        mvc.perform(requestBuilder)
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.errorMsg", is("premium parameter cant be negative")));
+    }
 }

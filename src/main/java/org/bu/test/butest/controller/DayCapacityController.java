@@ -19,8 +19,12 @@ public class DayCapacityController {
 
     @GetMapping("/day-capacity")
     public ResponseEntity<DailyAssignment> setDailyCapacity(
-            @RequestParam(name = "economy") @PositiveOrZero int economyRoomQuantity,
-            @RequestParam(name = "premium") @PositiveOrZero int premiumRoomQuantity) {
+            @RequestParam(name = "economy")
+            @PositiveOrZero(message = "economy parameter can\'t be negative")
+            int economyRoomQuantity,
+            @RequestParam(name = "premium")
+            @PositiveOrZero(message = "premium parameter can\'t be negative")
+            int premiumRoomQuantity) {
 
         final DailyCapacity dailyCapacity = new DailyCapacity(economyRoomQuantity, premiumRoomQuantity);
         final DailyAssignment dailyAssignment = this.roomFillmentService.fillRooms(dailyCapacity);
