@@ -21,8 +21,8 @@ public class DayCapacityController {
     public ResponseEntity<DailyAssignment> setDailyCapacity(
             @RequestParam(name = "economy") @PositiveOrZero int economyRoomQuantity,
             @RequestParam(name = "premium") @PositiveOrZero int premiumRoomQuantity) {
-        final DailyCapacity dailyCapacity = new DailyCapacity(economyRoomQuantity, premiumRoomQuantity);
 
+        final DailyCapacity dailyCapacity = new DailyCapacity(economyRoomQuantity, premiumRoomQuantity);
         final DailyAssignment dailyAssignment = this.roomFillmentService.fillRooms(dailyCapacity);
 
         return ResponseEntity.ok(dailyAssignment);

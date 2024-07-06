@@ -1,6 +1,5 @@
 package org.bu.test.butest.service;
 
-import java.util.Arrays;
 
 public class CustomerGenerator {
 
